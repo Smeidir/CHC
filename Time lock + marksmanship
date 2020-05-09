@@ -1,0 +1,55 @@
+package minegenkode;
+import java.util.Random;
+import java.util.ArrayList;
+import java.util.OptionalDouble;
+public class CHC {
+	
+	
+	static Integer counter = 0;
+	static Random ran = new Random();
+	static ArrayList<Integer> gjennomsnitt = new ArrayList<Integer>();
+	static ArrayList<Double> totalGS = new ArrayList<Double>();
+
+	
+	
+	public void attack() {
+		counter += 1;
+		int randint = ran.nextInt(100);
+		if (randint <= 23){
+			this.attack();
+			this.attack();
+			this.attack();
+		}
+		
+		
+		
+	}
+	public void reset() {
+		gjennomsnitt.add(counter);
+		counter = 0;
+		
+		
+	}
+	public static void main(String[] args) {
+		CHC test = new CHC();
+		for (int a= 0; a < 100;a++) {
+			for (int i= 0; i < 100; i++) {
+				test.attack();
+				test.attack();
+				test.attack();
+				test.reset();
+			
+			
+		}
+			double gs =  gjennomsnitt.stream().mapToInt(Integer::intValue).average().getAsDouble();
+			totalGS.add(gs);
+			gjennomsnitt.clear();
+		}
+	
+		OptionalDouble gs =  totalGS.stream().mapToDouble(o -> o).average();
+		System.out.println(gs);
+		
+
+	}
+
+}
